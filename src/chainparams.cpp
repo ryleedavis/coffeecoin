@@ -95,7 +95,7 @@ public:
 	consensus.nMinimumChainWork = consensus.powLimit;
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S(); //1683528
+        consensus.defaultAssumeValid = uint256(); //1683528
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -200,7 +200,7 @@ public:
 	consensus.nMinimumChainWork = consensus.powLimit;
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S(); //1174621
+        consensus.defaultAssumeValid = uint256(); //1174621
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
