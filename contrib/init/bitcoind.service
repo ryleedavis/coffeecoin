@@ -1,11 +1,11 @@
 # It is not recommended to modify this file in-place, because it will
 # be overwritten during package upgrades. If you want to add further
 # options or overwrite existing ones then use
-# $ systemctl edit bitcoind.service
+# $ systemctl edit coffeecoind.service
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/bitcoin/bitcoin.conf, except for those explicitly specified as arguments
+# /etc/coffeecoin/coffeecoin.conf, except for those explicitly specified as arguments
 # in ExecStart=
 
 [Unit]
@@ -13,35 +13,35 @@ Description=Bitcoin daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/bitcoind -daemon \
-                            -pid=/run/bitcoind/bitcoind.pid \
-                            -conf=/etc/bitcoin/bitcoin.conf \
-                            -datadir=/var/lib/bitcoind
+ExecStart=/usr/bin/coffeecoind -daemon \
+                            -pid=/run/coffeecoind/coffeecoind.pid \
+                            -conf=/etc/coffeecoin/coffeecoin.conf \
+                            -datadir=/var/lib/coffeecoind
 
 # Process management
 ####################
 
 Type=forking
-PIDFile=/run/bitcoind/bitcoind.pid
+PIDFile=/run/coffeecoind/coffeecoind.pid
 Restart=on-failure
 
 # Directory creation and permissions
 ####################################
 
-# Run as bitcoin:bitcoin
-User=bitcoin
-Group=bitcoin
+# Run as coffeecoin:coffeecoin
+User=coffeecoin
+Group=coffeecoin
 
-# /run/bitcoind
-RuntimeDirectory=bitcoind
+# /run/coffeecoind
+RuntimeDirectory=coffeecoind
 RuntimeDirectoryMode=0710
 
-# /etc/bitcoin
-ConfigurationDirectory=bitcoin
+# /etc/coffeecoin
+ConfigurationDirectory=coffeecoin
 ConfigurationDirectoryMode=0710
 
-# /var/lib/bitcoind
-StateDirectory=bitcoind
+# /var/lib/coffeecoind
+StateDirectory=coffeecoind
 StateDirectoryMode=0710
 
 # Hardening measures

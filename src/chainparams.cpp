@@ -106,7 +106,7 @@ public:
         pchMessageStart[1] = 0xc0;
         pchMessageStart[2] = 0xb6;
         pchMessageStart[3] = 0xdb;
-        nDefaultPort = 9333;
+        nDefaultPort = 9666;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 22;
         m_assumed_chain_state_size = 3;
@@ -395,8 +395,8 @@ std::unique_ptr<const CChainParams> CreateChainParams(const std::string& chain)
     if (chain == CBaseChainParams::MAIN)
         return std::unique_ptr<CChainParams>(new CMainParams());
     else if (chain == CBaseChainParams::TESTNET)
-        return std::unique_ptr<CChainParams>(new CTestNetParams());
-    else if (chain == CBaseChainParams::REGTEST)
+	return std::unique_ptr<CChainParams>(new CTestNetParams());
+   else if (chain == CBaseChainParams::REGTEST)
         return std::unique_ptr<CChainParams>(new CRegTestParams(gArgs));
     throw std::runtime_error(strprintf("%s: Unknown chain %s.", __func__, chain));
 }

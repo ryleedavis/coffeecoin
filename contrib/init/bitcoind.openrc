@@ -2,41 +2,41 @@
 
 # backward compatibility for existing gentoo layout 
 #
-if [ -d "/var/lib/bitcoin/.bitcoin" ]; then
-	BITCOIND_DEFAULT_DATADIR="/var/lib/bitcoin/.bitcoin"
+if [ -d "/var/lib/coffeecoin/.coffeecoin" ]; then
+	COFFEECOIND_DEFAULT_DATADIR="/var/lib/coffeecoin/.coffeecoin"
 else
-	BITCOIND_DEFAULT_DATADIR="/var/lib/bitcoind"
+	COFFEECOIND_DEFAULT_DATADIR="/var/lib/coffeecoind"
 fi
 
-BITCOIND_CONFIGFILE=${BITCOIND_CONFIGFILE:-/etc/bitcoin/bitcoin.conf}
-BITCOIND_PIDDIR=${BITCOIND_PIDDIR:-/var/run/bitcoind}
-BITCOIND_PIDFILE=${BITCOIND_PIDFILE:-${BITCOIND_PIDDIR}/bitcoind.pid}
-BITCOIND_DATADIR=${BITCOIND_DATADIR:-${BITCOIND_DEFAULT_DATADIR}}
-BITCOIND_USER=${BITCOIND_USER:-${BITCOIN_USER:-bitcoin}}
-BITCOIND_GROUP=${BITCOIND_GROUP:-bitcoin}
-BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/bitcoind}
-BITCOIND_NICE=${BITCOIND_NICE:-${NICELEVEL:-0}}
-BITCOIND_OPTS="${BITCOIND_OPTS:-${BITCOIN_OPTS}}"
+COFFEECOIND_CONFIGFILE=${COFFEECOIND_CONFIGFILE:-/etc/coffeecoin/coffeecoin.conf}
+COFFEECOIND_PIDDIR=${COFFEECOIND_PIDDIR:-/var/run/coffeecoind}
+COFFEECOIND_PIDFILE=${COFFEECOIND_PIDFILE:-${COFFEECOIND_PIDDIR}/coffeecoind.pid}
+COFFEECOIND_DATADIR=${COFFEECOIND_DATADIR:-${COFFEECOIND_DEFAULT_DATADIR}}
+COFFEECOIND_USER=${COFFEECOIND_USER:-${BITCOIN_USER:-coffeecoin}}
+COFFEECOIND_GROUP=${COFFEECOIND_GROUP:-coffeecoin}
+COFFEECOIND_BIN=${COFFEECOIND_BIN:-/usr/bin/coffeecoind}
+COFFEECOIND_NICE=${COFFEECOIND_NICE:-${NICELEVEL:-0}}
+COFFEECOIND_OPTS="${COFFEECOIND_OPTS:-${BITCOIN_OPTS}}"
 
 name="Bitcoin Core Daemon"
 description="Bitcoin cryptocurrency P2P network daemon"
 
-command="/usr/bin/bitcoind"
-command_args="-pid=\"${BITCOIND_PIDFILE}\" \
-		-conf=\"${BITCOIND_CONFIGFILE}\" \
-		-datadir=\"${BITCOIND_DATADIR}\" \
+command="/usr/bin/coffeecoind"
+command_args="-pid=\"${COFFEECOIND_PIDFILE}\" \
+		-conf=\"${COFFEECOIND_CONFIGFILE}\" \
+		-datadir=\"${COFFEECOIND_DATADIR}\" \
 		-daemon \
-		${BITCOIND_OPTS}"
+		${COFFEECOIND_OPTS}"
 
-required_files="${BITCOIND_CONFIGFILE}"
-start_stop_daemon_args="-u ${BITCOIND_USER} \
-			-N ${BITCOIND_NICE} -w 2000"
-pidfile="${BITCOIND_PIDFILE}"
+required_files="${COFFEECOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${COFFEECOIND_USER} \
+			-N ${COFFEECOIND_NICE} -w 2000"
+pidfile="${COFFEECOIND_PIDFILE}"
 
 # The retry schedule to use when stopping the daemon. Could be either
 # a timeout in seconds or multiple signal/timeout pairs (like
 # "SIGKILL/180 SIGTERM/300")
-retry="${BITCOIND_SIGTERM_TIMEOUT}"
+retry="${COFFEECOIND_SIGTERM_TIMEOUT}"
 
 depend() {
 	need localmount net
@@ -50,29 +50,29 @@ start_pre() {
 	checkpath \
 	-d \
 	--mode 0750 \
-	--owner "${BITCOIND_USER}:${BITCOIND_GROUP}" \
-	"${BITCOIND_DATADIR}"
+	--owner "${COFFEECOIND_USER}:${COFFEECOIND_GROUP}" \
+	"${COFFEECOIND_DATADIR}"
 
 	checkpath \
 	-d \
 	--mode 0755 \
-	--owner "${BITCOIND_USER}:${BITCOIND_GROUP}" \
-	"${BITCOIND_PIDDIR}"
+	--owner "${COFFEECOIND_USER}:${COFFEECOIND_GROUP}" \
+	"${COFFEECOIND_PIDDIR}"
 
 	checkpath -f \
-	-o ${BITCOIND_USER}:${BITCOIND_GROUP} \
+	-o ${COFFEECOIND_USER}:${COFFEECOIND_GROUP} \
 	-m 0660 \
-	${BITCOIND_CONFIGFILE}
+	${COFFEECOIND_CONFIGFILE}
 
 	checkconfig || return 1
 }
 
 checkconfig()
 {
-	if ! grep -qs '^rpcpassword=' "${BITCOIND_CONFIGFILE}" ; then
+	if ! grep -qs '^rpcpassword=' "${COFFEECOIND_CONFIGFILE}" ; then
 		eerror ""
-		eerror "ERROR: You must set a secure rpcpassword to run bitcoind."
-		eerror "The setting must appear in ${BITCOIND_CONFIGFILE}"
+		eerror "ERROR: You must set a secure rpcpassword to run coffeecoind."
+		eerror "The setting must appear in ${COFFEECOIND_CONFIGFILE}"
 		eerror ""
 		eerror "This password is security critical to securing wallets "
 		eerror "and must not be the same as the rpcuser setting."
