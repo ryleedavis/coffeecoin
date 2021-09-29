@@ -82,7 +82,7 @@ public:
 
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 0; // January 28, 2017
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;; // January 28, 2017
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT; // January 31st, 2018
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
@@ -106,15 +106,18 @@ public:
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdf;
-        nDefaultPort = 9666;
+        nDefaultPort = 8433;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 22;
         m_assumed_chain_state_size = 3;
 
         genesis = CreateGenesisBlock(1544904235, 0x00000006, 545259519, 1, 1000000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x1918500b88eb211c30bf3ae7a5faa51305bace111344ab696efbd619fe99eb38"));
-        assert(genesis.hashMerkleRoot == uint256S("0x634c2897ab0decc26fce8dbedbdb5defd62837948de775499394cb862e91ec95"));
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+	assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
+    	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
+       
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
@@ -184,11 +187,11 @@ public:
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999;
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 0;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT; // January 31st, 2018
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
@@ -206,15 +209,18 @@ public:
         pchMessageStart[1] = 0xd3;
         pchMessageStart[2] = 0xc9;
         pchMessageStart[3] = 0xf2;
-        nDefaultPort = 19335;
+        nDefaultPort = 18433;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
 
         genesis = CreateGenesisBlock(1544904235, 0x00000006, 545259519, 1, 1000000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x1918500b88eb211c30bf3ae7a5faa51305bace111344ab696efbd619fe99eb38"));
-        assert(genesis.hashMerkleRoot == uint256S("0x634c2897ab0decc26fce8dbedbdb5defd62837948de775499394cb862e91ec95"));
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
+    	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
+        
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -296,7 +302,7 @@ public:
         pchMessageStart[1] = 0xfb;
         pchMessageStart[2] = 0xdf;
         pchMessageStart[3] = 0xbf;
-        nDefaultPort = 19444;
+        nDefaultPort = 18544;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -305,8 +311,12 @@ public:
 
         genesis = CreateGenesisBlock(1544904235, 0x00000006, 545259519, 1, 1000000 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x1918500b88eb211c30bf3ae7a5faa51305bace111344ab696efbd619fe99eb38"));
-        assert(genesis.hashMerkleRoot == uint256S("0x634c2897ab0decc26fce8dbedbdb5defd62837948de775499394cb862e91ec95"));
+	
+	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
+        printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
+
+        assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
+   	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
