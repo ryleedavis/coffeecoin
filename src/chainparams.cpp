@@ -70,7 +70,7 @@ public:
         consensus.BIP65Height = 0; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; //3.5 days
+        consensus.nPowTargetTimespan = 24 * 60 * 60; //3.5 days
         consensus.nPowTargetSpacing = 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -92,7 +92,7 @@ public:
 
         // The best chain should have at least this much work.
         //consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000002ee655bf00bf13b4cca");
-	consensus.nMinimumChainWork = uint256S("0x00");
+	consensus.nMinimumChainWork = consensus.powLimit;
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256(); //1683528
@@ -115,8 +115,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
 	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-	assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
-    	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
+	assert(consensus.hashGenesisBlock == uint256S("0x4c6b651ced2ca24f73325b8244ae37c560f3056a687a50a18f31c6a7de38c985"));
+    	assert(genesis.hashMerkleRoot == uint256S("0x1fbbba8883c0a9d6bc93c0f7e491559c13179d572f26ebd35012e1d252373917"));
        
 
         // Note that of those which support the service bits prefix, most only support a subset of
@@ -146,7 +146,7 @@ public:
 
         checkpointData = {
             {
-               { 0, uint256S("0x1918500b88eb211c30bf3ae7a5faa51305bace111344ab696efbd619fe99eb38") },
+              // { 0, uint256S("0x1918500b88eb211c30bf3ae7a5faa51305bace111344ab696efbd619fe99eb38") },
 
 		// {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
               // f0846")},
@@ -155,7 +155,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data from rpc: getchaintxstats 4096 2cdba8c47858d34cf0e02dfb8733263a3ed8705b1663ec7c158783d77b93e7ee
-            /* nTime    */ 1565379143,
+            /* nTime    */ 0, //1565379143,
             /* nTxCount */ 0, //36299075,
             /* dTxRate  */ 0, //0.388813310286546
         };
@@ -180,7 +180,7 @@ public:
         consensus.BIP65Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // 3.5 days
         consensus.nPowTargetSpacing = 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
@@ -200,10 +200,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000035ed7ece35dc93");
+        consensus.nMinimumChainWork = consensus.powLimit; //uint256S("0x0000000000000000000000000000000000000000000000000035ed7ece35dc93");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xf19dfbdc0e6c399ef45d315d89fc3e972dd8da74503252bacaf664f64d86e6f6"); //1174621
+        consensus.defaultAssumeValid = uint256(); //uint256S("0xf19dfbdc0e6c399ef45d315d89fc3e972dd8da74503252bacaf664f64d86e6f6"); //1174621
 
         pchMessageStart[0] = 0xfe;
         pchMessageStart[1] = 0xd3;
@@ -218,8 +218,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
 	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
-    	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4c6b651ced2ca24f73325b8244ae37c560f3056a687a50a18f31c6a7de38c985"));
+    	assert(genesis.hashMerkleRoot == uint256S("0x1fbbba8883c0a9d6bc93c0f7e491559c13179d572f26ebd35012e1d252373917"));
         
 
         vFixedSeeds.clear();
@@ -276,7 +276,7 @@ public:
         consensus.BIP65Height = 0; // BIP65 activated on regtest (Used in functional tests)
         consensus.BIP66Height = 0; // BIP66 activated on regtest (Used in functional tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
@@ -315,8 +315,8 @@ public:
 	printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str());
         printf("block.GetHash = %s\n", genesis.hashMerkleRoot.ToString().c_str());
 
-        assert(consensus.hashGenesisBlock == uint256S("0x9f78986d7ecb011000dab7320beca6749f611fcb7f7de402e12a205b81807a2e"));
-   	assert(genesis.hashMerkleRoot == uint256S("0x9f091fdc883b007e61096bf5cb635b9b8866ff9faf73f494558fdca6ee27ae17"));
+        assert(consensus.hashGenesisBlock == uint256S("0x4c6b651ced2ca24f73325b8244ae37c560f3056a687a50a18f31c6a7de38c985"));
+   	assert(genesis.hashMerkleRoot == uint256S("0x1fbbba8883c0a9d6bc93c0f7e491559c13179d572f26ebd35012e1d252373917"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
